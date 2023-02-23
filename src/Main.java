@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>(List.of(1, 64, 7, 70, 16, 19, 10, 3));
+        List<Integer> list = new ArrayList<>(List.of(1, 64, 70, 70, 16, 19, 10, 30));
         System.out.println(list);
 
         Function<Integer, Integer> fun = a -> {
@@ -18,18 +18,8 @@ public class Main {
             return a;
         };
 
-        Comparator<Integer> comp1 = (a, b) -> fun.apply(a) - fun.apply(b);
-        if (isPrimeNumbersInList(list)) System.out.println(Collections.max(list, comp1));
-        if (!isPrimeNumbersInList(list)) System.out.println(Collections.min(list));
-    }
-
-    public static boolean isPrimeNumbersInList(List<Integer> l) {
-        for (int i = 0; i < l.size(); i++) {
-            for (int j = 2; j < l.get(i); j++)
-                if ((l.get(i) % j) == 0) {
-                    return true;
-                }
-        }
-        return false;
+        Comparator<Integer> comp2 = (a, b) -> fun.apply(a) - fun.apply(b);
+        Comparator<Integer> comp3 = (a, b) -> b - a;
+        System.out.println(Collections.max(list, comp2.thenComparing(comp3)));
     }
 }
