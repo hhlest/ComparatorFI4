@@ -7,11 +7,12 @@ import java.util.function.Predicate;
 
 public class Main {
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>(List.of(1, 64, 7, 70, 16, 19, 10));
+        List<Integer> list = new ArrayList<>(List.of(1, 64, 7, 70, 16, 19, 10, 3));
         System.out.println(list);
 
         Function<Integer, Integer> fun = a -> {
-            if ((a % 2) == 0) {
+            for (int i = 2; i < a; i++)
+            if ((a % i) == 0) {
                 return 0;
             }
             return a;
@@ -24,9 +25,10 @@ public class Main {
 
     public static boolean isPrimeNumbersInList(List<Integer> l) {
         for (int i = 0; i < l.size(); i++) {
-            if ((l.get(i) % 2) != 0) {
-                return true;
-            }
+            for (int j = 2; j < l.get(i); j++)
+                if ((l.get(i) % j) == 0) {
+                    return true;
+                }
         }
         return false;
     }
